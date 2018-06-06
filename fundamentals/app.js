@@ -1,22 +1,25 @@
 console.log("starting app");
 
 const fs = require('fs');
-const os = require('os');
-const notes = require('./notes.js');
 const _ = require('lodash')
+const yargs = require('yargs')
 
-// Grabs user info
-var user = os.userInfo();
+const notes = require('./notes.js');
 
-console.log(notes.addNote());
-console.log(notes.add(5, 15));
-console.log(_.isString(true));
-console.log(_.isString('n'));
-console.log(_.uniq(['Non', 'Non', 1, 2, 3, 1, 2, 3]));
+const argv = yargs.argv;
 
-// Appends text to end of file;
-// fs.appendFile('greetings.txt', `\nHello ${user.username}! You are ${notes.age}.\n`, (err) => {
-//     if (err) {
-//         console.log("unable to write to file");
-//     }
-// });
+var command = process.argv[2];
+console.log('Command', command);
+console.log(argv);
+
+if (command === 'list') {
+    notes.getAll();
+} else if (command === 'add') {
+    notes.addNote(argv.title, argv.body)
+} else if (command === 'remove') {
+    notes.deleteNote(argv.title)
+} else if (command === 'read') {
+    notes.getNote(argv.title);
+} else {
+    console.log('Command not found');
+}

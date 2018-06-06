@@ -1,12 +1,32 @@
 console.log("Starting Notes");
 
-module.exports.age = 21;
+// Example export add
+// module.exports.add = (a, b) => {
+//     return a + b;
+// }
 
-module.exports.addNote = () => {
-    console.log('add note');
-    return 'new note';
+// Function to add notes 
+var addNote = (title, body) => {
+    console.log(`Adding Note\n${title}\n${body}`);
+};
+
+var getAll = () => {
+    console.log('get all notes');
 }
 
-module.exports.add = (a, b) => {
-    return a + b;
+var getNote = (title) => {
+    console.log('Grabbing note for', title);
 }
+
+var deleteNote = (title) => {
+    console.log("Deleting notes for", title);
+}
+
+
+
+module.exports = {
+    addNote,
+    getAll,
+    getNote,
+    deleteNote
+};
