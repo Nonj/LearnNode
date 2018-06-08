@@ -27,8 +27,7 @@ var orginalNote = {
 var orginalNoteString = JSON.stringify(orginalNote);
 fs.writeFileSync('notes.json', orginalNoteString)
 
-// Reading note from file
-var noteString = fs.readFileSync('notes.json');
+// Reading note from file var noteString = fs.readFileSync('notes.json');
 var note = JSON.parse(noteString);
 console.log(typeof note);
 console.log(note);

@@ -5,9 +5,30 @@ console.log("Starting Notes");
 //     return a + b;
 // }
 
+const fs = require('fs');
+
 // Function to add notes 
 var addNote = (title, body) => {
-    console.log(`Adding Note\n${title}\n${body}`);
+    var notes = [];
+    var note = {
+        title,
+        body
+    };
+
+
+    try {
+        var pastNotes = fs.readFileSync('notes-data.json');
+        notes = JSON.parse(pastNotes);
+    } catch (e) {
+
+    }
+
+    var dupNotes = notes.filter((note)  => note.title === title);
+
+    if (dupNotes.length === 0) {
+        notes.push(note);
+        fs.writeFileSync('notes-data.json', JSON.stringify(notes))
+    }
 };
 
 var getAll = () => {
