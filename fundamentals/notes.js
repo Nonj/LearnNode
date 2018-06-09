@@ -7,27 +7,39 @@ console.log("Starting Notes");
 
 const fs = require('fs');
 
+var saveNotes = (notes) => {
+    
+    fs.writeFileSync('notes-data.json', JSON.stringify(notes))
+
+};
+
+var fetchNotes = () => {
+
+    try {
+        var pastNotes = fs.readFileSync('notes-data.json');
+        return JSON.parse(pastNotes);
+    } catch (e) {
+        return [];
+    }
+};
+
+
 // Function to add notes 
 var addNote = (title, body) => {
-    var notes = [];
+    var notes = fetchNotes();
     var note = {
         title,
         body
     };
 
 
-    try {
-        var pastNotes = fs.readFileSync('notes-data.json');
-        notes = JSON.parse(pastNotes);
-    } catch (e) {
-
-    }
 
     var dupNotes = notes.filter((note)  => note.title === title);
 
     if (dupNotes.length === 0) {
         notes.push(note);
-        fs.writeFileSync('notes-data.json', JSON.stringify(notes))
+        saveNotes(notes);
+        return note;
     }
 };
 
