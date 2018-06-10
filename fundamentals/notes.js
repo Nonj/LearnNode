@@ -14,7 +14,6 @@ var saveNotes = (notes) => {
 };
 
 var fetchNotes = () => {
-
     try {
         var pastNotes = fs.readFileSync('notes-data.json');
         return JSON.parse(pastNotes);
@@ -52,7 +51,12 @@ var getNote = (title) => {
 }
 
 var deleteNote = (title) => {
-    console.log("Deleting notes for", title);
+    // fetch notes
+    let notes = fetchNotes();
+    // Filter notes
+    notes = notes.filter((note) => note.title !== title);
+    // save new notes
+    saveNotes(notes);
 }
 
 
