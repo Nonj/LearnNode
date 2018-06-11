@@ -1,4 +1,4 @@
-console.log("starting app");
+
 
 const fs = require('fs');
 const _ = require('lodash')
@@ -18,7 +18,10 @@ if (command === 'list') {
         console.log()
     }
 } else if (command === 'remove') {
-    notes.deleteNote(argv.title)
+    let noteRemoved = notes.deleteNote(argv.title);
+
+    let message = noteRemoved ? 'Note was removed' : 'Note not found';
+    console.log(message); 
 } else if (command === 'read') {
     notes.getNote(argv.title);
 } else {

@@ -1,4 +1,4 @@
-console.log("Starting Notes");
+
 
 // Example export add
 // module.exports.add = (a, b) => {
@@ -10,14 +10,16 @@ const fs = require('fs');
 var saveNotes = (notes) => {
     
     fs.writeFileSync('notes-data.json', JSON.stringify(notes))
-
 };
 
 var fetchNotes = () => {
     try {
-        var pastNotes = fs.readFileSync('notes-data.json');
-        return JSON.parse(pastNotes);
+        let obj = [];
+        var pastNotes = fs.readFileSync('notes-data.json')
+        obj = JSON.parse(pastNotes);
+        return obj;
     } catch (e) {
+        console.log("Step 2 Err \n");
         return [];
     }
 };
@@ -51,12 +53,14 @@ var getNote = (title) => {
 }
 
 var deleteNote = (title) => {
-    // fetch notes
+
     let notes = fetchNotes();
-    // Filter notes
-    notes = notes.filter((note) => note.title !== title);
-    // save new notes
-    saveNotes(notes);
+
+    let filteredNotes = notes.filter((note) => note.title !== title);
+
+    saveNotes(filteredNotes);
+
+    return notes.length !== filteredNotes.length;
 }
 
 
