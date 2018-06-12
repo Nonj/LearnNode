@@ -32,9 +32,6 @@ var addNote = (title, body) => {
         title,
         body
     };
-
-
-
     var dupNotes = notes.filter((note)  => note.title === title);
 
     if (dupNotes.length === 0) {
@@ -50,19 +47,19 @@ var getAll = () => {
 
 var getNote = (title) => {
     console.log('Grabbing note for', title);
+    let notes = fetchNotes();
+    let note = notes.filter((notes) => notes.title === title);
+    console.log(note);
+    return note;
+
 }
 
 var deleteNote = (title) => {
-
     let notes = fetchNotes();
-
     let filteredNotes = notes.filter((note) => note.title !== title);
-
     saveNotes(filteredNotes);
-
     return notes.length !== filteredNotes.length;
 }
-
 
 
 module.exports = {

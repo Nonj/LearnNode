@@ -23,7 +23,8 @@ if (command === 'list') {
     let message = noteRemoved ? 'Note was removed' : 'Note not found';
     console.log(message); 
 } else if (command === 'read') {
-    notes.getNote(argv.title);
+    let note = notes.getNote(argv.title);
+    console.log(`Note title: ${note[0].title}\nNote Message: ${note[0].body}`);
 } else {
     console.log('Command not found');
 }
