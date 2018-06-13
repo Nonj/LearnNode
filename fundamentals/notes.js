@@ -42,7 +42,7 @@ var addNote = (title, body) => {
 };
 
 var getAll = () => {
-    console.log('get all notes');
+    console.log('get all notes lul');
 }
 
 var getNote = (title) => {
