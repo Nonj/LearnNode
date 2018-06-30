@@ -6,11 +6,10 @@
     </head>
 
     <body>
-        <h1>{{bodyTitle}}</h1>
+        {{> header}}
         <p>{{message}}</p>
 
-        <footer>
-            <p>Copyright {{currentYear}}</p>
-        </footer>
+        {{!--Syntax for injection "partials", kinda like components  --}}
+        {{> footer}}
     </body>
 </html>

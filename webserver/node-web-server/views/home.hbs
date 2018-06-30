@@ -6,11 +6,12 @@
     </head>
 
     <body>
-        <h1>{{bodyTitle}}</h1>
-        <p>{{message}}</p>
+        {{> header}}
 
-        <footer>
-            <p>Copyright {{currentYear}}</p>
-        </footer>
+        {{!--  First call is helper, then after it is an parameter to the function--}}
+        <p>{{screamIt message}}</p>
+
+        {{!--Syntax for injection "partials", kinda like components  --}}
+        {{> footer}}
     </body>
 </html>

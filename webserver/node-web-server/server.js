@@ -3,9 +3,25 @@ const hbs = require('hbs');
 
 let app = express();
 
+// Registering where to grab parts (components)
+hbs.registerPartials(__dirname + "/views/partials")
+
 // Tells express which view engine we'd like to use
 app.set('view engine', 'hbs')
 
+// Registering function to call in hbs templates
+hbs.registerHelper('getCurrentYear', () => {
+    return new Date().getFullYear()
+})
+
+// Registering function to call in hbs templates
+// Takes name of helper, and function
+hbs.registerHelper('screamIt', (text) => {
+    return text.toUpperCase()
+})
+
+// Set path to views file
+app.set('views', __dirname + "/views")
 // Allows for serving of static webpages
 // __dirname is an absolute path to this folder.
 app.use(express.static(__dirname + '/public'))
@@ -16,7 +32,6 @@ app.get('/', (req, res) => {
         pageTitle: 'Home Page',
         bodyTitle: 'Welcome',
         message: 'Welcome Home',
-        currentYear: '2018'
     });
 });
 
@@ -24,7 +39,6 @@ app.get('/', (req, res) => {
 app.get('/about', (req, res) => {
     res.render('about.hbs', {
        pageTitle: 'About Page',
-       currentYear: new Date().getFullYear()
     });
 });
 
