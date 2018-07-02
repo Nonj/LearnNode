@@ -1,5 +1,6 @@
 const express = require('express');
 const hbs = require('hbs');
+const fs = require('fs');
 
 let app = express();
 
@@ -22,6 +23,30 @@ hbs.registerHelper('screamIt', (text) => {
 
 // Set path to views file
 app.set('views', __dirname + "/views")
+
+
+// Registering a logging middleware
+// Logs out the current date/time
+// Logs out the method of which the webpage was called (GET, PUT, POST)
+// Logs out the page URL
+app.use((req, res, next) => {
+    let now = new Date().toString();
+
+    let log = `${now}: ${req.method} ${req.url}`;
+    console.log(`${now}: ${req.method} ${req.url}`);
+
+    fs.appendFile('server.log', log + '\n', (err) => {
+        if (err) console.log('unable to append to server.log');
+    });
+    next();
+});
+
+// Express is ordered in the way which use is called
+// This will only take users who visit the site to a maintenance page
+// app.use((req,res,next) => {
+//    res.render('maintenance.hbs') 
+// })
+
 // Allows for serving of static webpages
 // __dirname is an absolute path to this folder.
 app.use(express.static(__dirname + '/public'))
