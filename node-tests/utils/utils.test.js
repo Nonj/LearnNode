@@ -35,7 +35,7 @@ it('Should expect some values', ()=> {
 })
 // Should verify first and last names are set
 // Asserts it includes firstname and lastname with proper values
-it('Should set proper values for firstname and last name', () => {
+it('Should set proper values for first name and last name', () => {
     let user = {age: 23, location: 'seattle'}
     let res = utils.setName(user, "Non Bun");
 
